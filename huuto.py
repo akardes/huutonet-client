@@ -867,16 +867,16 @@ def list_items(addtime=None, area=None, biddernro=None, category=None, classific
         raise ValueError('addtime must be one of these values: "past-day", "past-2days", "past-5days", "past-week"')
 
     if classification and classification not in ['none', 'new', 'like-new', 'good', 'acceptable', 'weak']:
-        raise ValueError('addtime must be one of these values: "none", "new", "like-new", "good", "acceptable", "weak"')
+        raise ValueError('classification must be one of these values: "none", "new", "like-new", "good", "acceptable", "weak"')
 
     if limit and limit not in [50, 500]:
         raise ValueError('"limit" must be either 50 or 500')
 
     if sellstyle and sellstyle not in ['all', 'auction', 'buy-now']:
-        raise ValueError('addtime must be one of these values: "all", "auction", "buy-now"')
+        raise ValueError('sellstyle must be one of these values: "all", "auction", "buy-now"')
 
     if sort and sort not in ['hits', 'newest', 'closing', 'lowprice', 'highprice', 'bidders', 'title']:
-        raise ValueError('addtime must be one of these values: '
+        raise ValueError('sort must be one of these values: '
                          'hits, newest, closing, lowprice, highprice, bidders, title')
 
     is_type("biddernro", biddernro, int)
