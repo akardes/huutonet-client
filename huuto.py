@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# coding=utf-8
 
 import configparser
 import datetime
@@ -385,7 +386,7 @@ def get_item_bids(itemid):
     Retrieve bids on an item.
 
     Args:
-        itemid (int) - item’s id
+        itemid (int) - item's id
     """
     path = '/items/{}/bids'.format(itemid)
 
@@ -397,8 +398,8 @@ def create_item_bid(itemid, bid, automate=0, quantity_min=1, quantity_max=1):
     Place a bid on an item
 
     Args:
-        itemid (int) - item’s id
-        bid (float) - bid amount (euros), eg. “16.50”
+        itemid (int) - item's id
+        bid (float) - bid amount (euros), eg. "16.50"
         automate (int (0 = no, 1 = yes). Default 0.) - Bidding automation. With automate on, bid parameter is considered
             to be the maximum amount the user is willing to pay. Bidding automation system will take care of the bidding
             process on behalf of the user and try to win the item with the smallest possible price.
@@ -492,12 +493,12 @@ def create_item(buy_now_price=None, category_id=None, closing_time=None, conditi
     Note: Parameters with "None" value are omitted from the API call.
 
     Args:
-        buy_now_price (float) - Buy now price. Required when sale method is “buy-now”.
-        category_id (int) - Item’s category id
+        buy_now_price (float) - Buy now price. Required when sale method is "buy-now".
+        category_id (int) - Item's category id
         closing_time (string - eg. '2016-12-04 18:55:20') - together with listTime, alternative to openDays
         condition (new - uusi, like-new - uudenveroinen, good - hyvä, acceptable - tyydyttävä, weak - heikko) -
-            item’s condition
-        description (string) - item’s description
+            item's condition
+        description (string) - item's description
         delivery_methods (list - pickup, shipment. Note: list!) - delivery methods
             ATTENTION - This can currently not be set through the API. Result is always empty!
         delivery_terms (string) - delivery terms
@@ -512,12 +513,12 @@ def create_item(buy_now_price=None, category_id=None, closing_time=None, conditi
             (ostajien rajaaminen palautepistemäärän perusteella).
             Option available for Huuto Plus users.
         minimum_increase (float) - Minimum increase for bidding. (Not available for regular users.
-            Required for Huuto Plus users, who can set this value freely.) Used only when sale method is “auction”.
+            Required for Huuto Plus users, who can set this value freely.) Used only when sale method is "auction".
         open_days (int) - amount of days item will be available for selling
         original_id (int) - originalId can be used to easily republish an old, closed item.
             Title, description, sell method, price, images and other data will get copied from the previous into newly
-            created item, which will have a “draft” status by default. To publish it, its status must be updated to
-            “preview” and after that, to “published”.
+            created item, which will have a "draft" status by default. To publish it, its status must be updated to
+            "preview" and after that, to "published".
         payment_methods (list - wire-transfer, cash, mobile-pay. Multiple options can be sent. Note: list!)
         payment_terms (string - payment terms description, max. 1000 chars)
         postal_code (string - eg. '00100') - Finnish postal code. Mandatory field by default.
@@ -527,16 +528,16 @@ def create_item(buy_now_price=None, category_id=None, closing_time=None, conditi
         republish (int - 0 or 1, boolean) - Republish item (optional).
             If not sold, item will be republished automatically.
             Can be used for items that are open more than 3 days. Option is available only for Huuto Plus users.
-        sale_method (string - auction, buy-now. Note: “Hybrid” method is no longer available.) - item’s selling method
-        starting_price (float) - Starting price for bidding. Required when sale method is “auction”.
-        status (string - draft, preview, published, closed, disabled, waiting) - item’s status -
-            When creating a new item, status will be “preview” by default.
-        title (string - max. 60 chars) - Item’s title
+        sale_method (string - auction, buy-now. Note: "Hybrid" method is no longer available.) - item's selling method
+        starting_price (float) - Starting price for bidding. Required when sale method is "auction".
+        status (string - draft, preview, published, closed, disabled, waiting) - item's status -
+            When creating a new item, status will be "preview" by default.
+        title (string - max. 60 chars) - Item's title
         vat (int - between 0-100) - Used vat rate as a percentage. Available for companies.
         offers_allowed (int - 0 or 1, boolean) - Allow offers from users. Allowed by default.
 
     More info about STATUS:
-        To publish an item, you have to update your item’s status to “published” via a PUT request.
+        To publish an item, you have to update your item's status to "published" via a PUT request.
         Item can not becreated directly into published state.
         Item can be created with draft status in which case no additional parameters are required.
         This is useful if an application wants to save item images before asking other parameters from user.
@@ -749,9 +750,9 @@ def edit_item(item_id,
 
 def preview_item(item_id):
     """
-    Set item’s status to “preview”.
+    Set item's status to "preview".
     At this point all saved data will be validated.
-    After a successful “preview”, an item can published.
+    After a successful "preview", an item can published.
 
     Args:
         item_id (int): Id of the item to be edited, mandatory.
@@ -793,7 +794,7 @@ def close_item(item_id):
 
 def get_item(item_id):
     """
-    Retrieve item’s data.
+    Retrieve item's data.
 
     Args:
         item_id (int): Id of the item to be edited, mandatory.
@@ -805,7 +806,7 @@ def get_item(item_id):
 
 def get_item_own(item_id):
     """
-    Retrieve your own item’s data. Requires authentication.
+    Retrieve your own item's data. Requires authentication.
 
     Args:
         item_id (int): Id of the item to be edited, mandatory.
@@ -835,25 +836,25 @@ def list_items(addtime=None, area=None, biddernro=None, category=None, classific
     Item search. Various parameters can be used.
 
     Args:
-        addtime (string - past-day, past-2days, past-5days, past-week) - item’s list time
+        addtime (string - past-day, past-2days, past-5days, past-week) - item's list time
         area (string - eg. "Helsinki", "Uusimaa", "00100") - city, municipality or zipcode
-        biddernro (int) - bidder’s numeric user id
-        category (int | string) - category’s id, multiple category id’s can be separated with commas or dashes, 
+        biddernro (int) - bidder's numeric user id
+        category (int | string) - category's id, multiple category id's can be separated with commas or dashes, 
             eg. 1-2-3
         classification (string - none - ei määritelty, new - uusi, like-new - uudenveroinen, good - hyvä,
-            acceptable - tyydyttävä, weak - heikko) - item’s condition. In the API documentation this parameter is
+            acceptable - tyydyttävä, weak - heikko) - item's condition. In the API documentation this parameter is
             called condition, but judging by the API response, classification is the actual parameter name.
-        closingtime (string - next-day, next-2days, next-5days, next-week) - item’s list time
-        feedback_limit (int) - filter by user’s feedback value
+        closingtime (string - next-day, next-2days, next-5days, next-week) - item's list time
+        feedback_limit (int) - filter by user's feedback value
         limit (int (50 | 500) - default is 50) - items per page limit
         page (int) - result set page number
         price_max (float) - maximum price
         price_min (float) - minimum price
-        seller_type (string - company, user) - seller’s type, default is all.
-        sellernro (int) - seller’s numeric user id
-        sellstyle (string - all, auction, buy-now) - item’s selling method
+        seller_type (string - company, user) - seller's type, default is all.
+        sellernro (int) - seller's numeric user id
+        sellstyle (string - all, auction, buy-now) - item's selling method
         sort (string - hits, newest, closing, lowprice, highprice, bidders, title.
-            Default is “hits”.) - result rest sorting
+            Default is "hits".) - result rest sorting
         status (string - open, closed) - item's status
         words (string) - search string
     """
@@ -936,7 +937,7 @@ def add_item_image(itemid, image):
     any other parameters from the user. When request status is draft, no additional parameters are required.
 
     Args:
-        itemid (int) - item’s id (already present in the url)
+        itemid (int) - item's id (already present in the url)
         image (file) - local path to image file
     """
     path = '/items/{}/images'.format(itemid)
@@ -951,8 +952,8 @@ def delete_item_image(itemid, imageid):
     Delete an image from item.
 
     Args:
-        itemid (int) - item’s id
-        imageid (int) - image’s id
+        itemid (int) - item's id
+        imageid (int) - image's id
 
     Status Codes:
         204 No Content – when image deleted successfully
@@ -967,10 +968,10 @@ def delete_item_image(itemid, imageid):
 ###################################################
 def get_item_offers(itemid):
     """
-    Retrieve information about item’s offers
+    Retrieve information about item's offers
 
     Args:
-        itemid (int) - item’s id
+        itemid (int) - item's id
     """
     path = '/items/{}/offers'.format(itemid)
 
@@ -982,8 +983,8 @@ def create_item_offer(itemid, offer, message):
     Post a new offer (hintaehdotus) to item.
 
     Args:
-        itemid (int) - item’s id
-        offer (float) - offer amount (euros), eg. “16.50”
+        itemid (int) - item's id
+        offer (float) - offer amount (euros), eg. "16.50"
         message (string(255)) - message related to offer
     """
     path = '/items/{}/offers'.format(itemid)
@@ -999,8 +1000,8 @@ def answer_item_offer(itemid, offerid, status):
     Cancelling can only be done if seller has not yet accepted or refused the offer in question.
 
     Args:
-        itemid (int) - item’s id
-        offerid (int) - offer’s id
+        itemid (int) - item's id
+        offerid (int) - offer's id
         status (string) - offer status to be updated
     """
     # TODO: find out what different offer statuses are available
@@ -1016,10 +1017,10 @@ def answer_item_offer(itemid, offerid, status):
 ###################################################
 def get_item_questions(itemid):
     """
-    Retrieve information about item’s questions and seller’s answers.
+    Retrieve information about item's questions and seller's answers.
 
     Args:
-        itemid (int) - item’s id
+        itemid (int) - item's id
     """
     path = '/items/{}/questions'.format(itemid)
 
@@ -1031,7 +1032,7 @@ def create_item_question(itemid, question):
     Post a new offer (hintaehdotus) to item.
 
     Args:
-        itemid (int) - item’s id
+        itemid (int) - item's id
         question (string(255)) – question text
     """
     path = '/items/{}/offers'.format(itemid)
@@ -1045,8 +1046,8 @@ def answer_item_question(itemid, questionid, answer):
     Answer to a question. Only seller can post answers.
 
     Args:
-        itemid (int) - item’s id
-        questionid (int) - item’s id
+        itemid (int) - item's id
+        questionid (int) - item's id
         answer (string(255)) - answer text
     """
     path = '/items/{}/question/{}'.format(itemid, questionid)
@@ -1092,7 +1093,7 @@ def get_user_feedbacks():
 
 
 def get_user_favorites():
-    """Retrieve user’s favorite items. Also known as “Muistilista”."""
+    """Retrieve user's favorite items. Also known as "Muistilista"."""
     path = '/users/{}/favorites'.format(userid())
 
     return get(path, auth=True)
@@ -1106,7 +1107,7 @@ def get_user_favorites():
 
 def add_user_favorites(itemid):
     """
-    Add item to user’s favorite list.
+    Add item to user's favorite list.
 
     Args:
         itemid (int) – item id
@@ -1127,8 +1128,8 @@ def get_user_purchases(status='all', post_id=False):
     Retrieve items which user has bidded or purchased.
 
     Args:
-        post_id (int) - post’s unique id <<< DOESN'T SEEM TO DO ANYTHING!!!
-        status (string) - item’s status - options: open, closed, processing, all
+        post_id (int) - post's unique id <<< DOESN'T SEEM TO DO ANYTHING!!!
+        status (string) - item's status - options: open, closed, processing, all
 
     """
     path = '/users/{}/purchases'.format(userid())
@@ -1143,9 +1144,9 @@ def get_user_sales(page=1, status='all', sold=0, sort='closing-time', republishe
 
     Args:
         republished (int - set eg. to 1 to enable filter) - If item is republished or not.
-            Effective only if status “open” or “closed” is used at the same time.
+            Effective only if status "open" or "closed" is used at the same time.
         sold (int (0 or 1)) - If item is sold or not.
-            Effective only if status “open” or “closed” is used at the same time.
+            Effective only if status "open" or "closed" is used at the same time.
         status (string - all, open, closed, waiting, draft) - item status
         sort (string - bidders, closing-time, current-price, list-time) - result set sorting
         page (int) - result page number
